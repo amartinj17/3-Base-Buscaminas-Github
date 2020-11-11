@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import sun.launcher.resources.launcher;
+
 /**
  * Clase gestora del tablero de juego.
  * Guarda una matriz de enteros representado el tablero.
@@ -34,11 +36,33 @@ public class ControlJuego {
 	 * 			El resto de posiciones que no son minas guardan en el entero cuántas minas hay alrededor de la celda
 	 */
 	public void inicializarPartida(){
+		Random r = new Random();
+		boolean hayMina;
+		int iAux,jAux;
+		
+		//poner todas las posiciones del tablero a 0
+		for(int l=0 ; l<LADO_TABLERO ; l++){
+			for(int m=0 ; m<LADO_TABLERO ; m++){
+				tablero[l][m] = 0; 
+			}
+		}
+		//poner puntuacion a 0
+		puntuacion = 0;
+		//Colocar minas de forma aleatoria donde no haya ninguna ya;
+		for(int k=0 ; k<MINAS_INICIALES ; k++){
+			do{
+				iAux = r.nextInt()*10;
+				jAux =r.nextInt()*10;
 
-		//TODO: Repartir minas e inicializar puntaci�n. Si hubiese un tablero anterior, lo pongo todo a cero para inicializarlo.
-		
-		
-		
+				if(tablero[iAux][jAux] == MINA){//Si hay mina calcula otra poscicion
+					hayMina = true;
+				}else{//Si no hay mina, añade una y sale del bucle
+					hayMina = false;
+					tablero[iAux][jAux] = MINA;
+				}
+			}while(hayMina);
+		}
+
 		//Al final del m�todo hay que guardar el n�mero de minas para las casillas que no son mina:
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
@@ -58,9 +82,95 @@ public class ControlJuego {
 	 * @return : El número de minas que hay alrededor de la casilla [i][j]
 	 **/
 	private int calculoMinasAdjuntas(int i, int j){
-		return 0;
-	}
-	
+		int minas = 0;
+		
+		if((i==0 && j==LADO_TABLERO-1) || (i==LADO_TABLERO-1 && j==0)){
+			if((i==0 || j==0)){//Uno es 0
+				if(i == 0){
+					if(tablero[i][j-1] == MINA){
+						minas++;
+					}
+					if(tablero[i+1][j-1] == MINA){
+						minas ++;
+					}
+				}else{
+					if(j == 0){
+						if(tablero[i-1][j] == MINA){
+							minas++;
+						}
+						if(tablero[i-1][j+1] == MINA){
+							minas ++;
+						}
+					}
+				}
+				if(tablero[i][j+1] == MINA){
+					minas++;
+				}
+				if(tablero[i+1][j] == MINA){
+					minas ++;
+				}
+				if(tablero[i+1][j+1] == MINA){
+					minas ++;
+				}
+			}else{
+				if(i==0 && j==0){//los dos son 0
+					if(tablero[i][j+1] == MINA){
+						minas++;
+					}
+					if(tablero[i+1][j] == MINA){
+						minas ++;
+					}
+					if(tablero[i+1][j+1] == MINA){
+						minas ++;
+					}
+				}
+			}
+			
+			if((i==LADO_TABLERO-1 || j==LADO_TABLERO-1)){//Uno de los dos es max
+				if(i == LADO_TABLERO-1){
+					if(tablero[i-1][j+1] == MINA){
+						minas++;
+					}
+					if(tablero[i][j+1] == MINA){
+						minas ++;
+					}
+				}else{
+					if(j == 0){
+						if(tablero[i-1][j] == MINA){
+							minas++;
+						}
+						if(tablero[i-1][j-1] == MINA){
+							minas ++;
+						}
+					}
+				}
+				if(tablero[i-1][j-1] == MINA){
+					minas++;
+				}
+				if(tablero[i-1][j] == MINA){
+					minas ++;
+				}
+				if(tablero[i][j-1] == MINA){
+					minas ++;
+				}
+			}else{
+				if(i==0 && j==0){//los dos son max
+					if(tablero[i-1][j-1] == MINA){
+						minas++;
+					}
+					if(tablero[i-1][j] == MINA){
+						minas ++;
+					}
+					if(tablero[i][j-1] == MINA){
+						minas ++;
+				}
+			}
+		}else{
+			
+		}	
+			return minas;
+		}
+		
 	/**
 	 * Método que nos permite 
 	 * @pre : La casilla nunca debe haber sido abierta antes, no es controlado por el ControlJuego. Por lo tanto siempre sumaremos puntos
