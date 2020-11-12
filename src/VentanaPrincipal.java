@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 
 /**
  * Ventana principal del Buscaminas
- * @author {Rellenar por el alumno}
+ * @author albertoMartin
  */
 public class VentanaPrincipal {
 
@@ -143,6 +143,12 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
 		//TODO
+		//Dar listeners a los botones
+		for(int i=0; i<10;i++){
+			for (int j=0 ; i<10 ; i++){
+				botonesJuego[i][j].addActionListener(new ActionBoton());
+			}
+		}
 	}
 	
 	
@@ -160,6 +166,9 @@ public class VentanaPrincipal {
 	 */
 	public void mostrarNumMinasAlrededor(int i , int j) {
 		//TODO
+		//seleccionar el panel[i][j] correspondiente
+		//Eliminar todos los componentes(INTERNET)
+		//Añadir JLabel centrad oy no editable
 	}
 	
 	
