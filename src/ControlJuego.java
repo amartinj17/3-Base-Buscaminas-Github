@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-import sun.launcher.resources.launcher;
+/* import sun.launcher .resources.launcher; DA ERROR*/
 
 /**
  * Clase gestora del tablero de juego.
@@ -27,6 +27,7 @@ public class ControlJuego {
 		
 		//Inicializamos una nueva partida
 		inicializarPartida();
+		depurarTablero();
 	}
 	
 	
@@ -48,11 +49,11 @@ public class ControlJuego {
 		}
 		//poner puntuacion a 0
 		puntuacion = 0;
-		//Colocar minas de forma aleatoria donde no haya ninguna ya;
+		//Colocar minas de forma aleatoria donde no haya ninguna ya
 		for(int k=0 ; k<MINAS_INICIALES ; k++){
 			do{
-				iAux = r.nextInt()*10;
-				jAux =r.nextInt()*10;
+				iAux = (r.nextInt(10));
+				jAux = (r.nextInt(10));
 
 				if(tablero[iAux][jAux] == MINA){//Si hay mina calcula otra poscicion
 					hayMina = true;
@@ -83,93 +84,20 @@ public class ControlJuego {
 	 **/
 	private int calculoMinasAdjuntas(int i, int j){
 		int minas = 0;
-		
-		if((i==0 && j==LADO_TABLERO-1) || (i==LADO_TABLERO-1 && j==0)){
-			if((i==0 || j==0)){//Uno es 0
-				if(i == 0){
-					if(tablero[i][j-1] == MINA){
+		int vertical,horizontal;
+		for(vertical = (i-1); vertical <= (i+1); vertical++){
+			for(horizontal = (j-1); horizontal <=(j+1) ; horizontal++){
+				
+				if(vertical>=0 && vertical<=LADO_TABLERO-1 && horizontal>=0 && horizontal<=LADO_TABLERO-1){
+					if(tablero[vertical][horizontal] == MINA){
 						minas++;
-					}
-					if(tablero[i+1][j-1] == MINA){
-						minas ++;
-					}
-				}else{
-					if(j == 0){
-						if(tablero[i-1][j] == MINA){
-							minas++;
-						}
-						if(tablero[i-1][j+1] == MINA){
-							minas ++;
-						}
-					}
-				}
-				if(tablero[i][j+1] == MINA){
-					minas++;
-				}
-				if(tablero[i+1][j] == MINA){
-					minas ++;
-				}
-				if(tablero[i+1][j+1] == MINA){
-					minas ++;
-				}
-			}else{
-				if(i==0 && j==0){//los dos son 0
-					if(tablero[i][j+1] == MINA){
-						minas++;
-					}
-					if(tablero[i+1][j] == MINA){
-						minas ++;
-					}
-					if(tablero[i+1][j+1] == MINA){
-						minas ++;
 					}
 				}
 			}
-			
-			if((i==LADO_TABLERO-1 || j==LADO_TABLERO-1)){//Uno de los dos es max
-				if(i == LADO_TABLERO-1){
-					if(tablero[i-1][j+1] == MINA){
-						minas++;
-					}
-					if(tablero[i][j+1] == MINA){
-						minas ++;
-					}
-				}else{
-					if(j == 0){
-						if(tablero[i-1][j] == MINA){
-							minas++;
-						}
-						if(tablero[i-1][j-1] == MINA){
-							minas ++;
-						}
-					}
-				}
-				if(tablero[i-1][j-1] == MINA){
-					minas++;
-				}
-				if(tablero[i-1][j] == MINA){
-					minas ++;
-				}
-				if(tablero[i][j-1] == MINA){
-					minas ++;
-				}
-			}else{
-				if(i==0 && j==0){//los dos son max
-					if(tablero[i-1][j-1] == MINA){
-						minas++;
-					}
-					if(tablero[i-1][j] == MINA){
-						minas ++;
-					}
-					if(tablero[i][j-1] == MINA){
-						minas ++;
-				}
-			}
-		}else{
-			
-		}	
-			return minas;
 		}
+
+		return minas;
+	}
 		
 	/**
 	 * Método que nos permite 
