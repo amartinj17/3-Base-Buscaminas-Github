@@ -2,8 +2,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,10 +10,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.GroupLayout.Alignment;
 
 /**
  * Ventana principal del Buscaminas
- * @author albertoMartin
+ * @author AlbertoMartin
  */
 public class VentanaPrincipal {
 
@@ -67,7 +66,7 @@ public class VentanaPrincipal {
 		
 		
 		botonEmpezar = new JButton("Go!");
-		pantallaPuntuacion = new JTextField("0");
+		pantallaPuntuacion = new JTextField(juego.getPuntuacion());
 		pantallaPuntuacion.setEditable(false);
 		pantallaPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -143,14 +142,18 @@ public class VentanaPrincipal {
 	 */
 	public void inicializarListeners(){
 		//TODO
-		//Dar listeners a los botones
-		for(int i=0; i<10;i++){
-			for (int j=0 ; i<10 ; i++){
-				botonesJuego[i][j].addActionListener(new ActionBoton());
+		
+		botonEmpezar.addActionListener((f)-> {//Dar listeners a los botones en el momento en el que se da al botón de empezar
+			botonEmpezar.setText("JUGANDO");
+			for(int i=0; i<juego.LADO_TABLERO;i++){
+				for (int j=0 ; j<juego.LADO_TABLERO ; j++){
+					botonesJuego[i][j].addActionListener((e)->{
+						new ActionBoton(this).actionPerformed(e);
+					});
+				}
 			}
-		}
+		});
 	}
-	
 	
 	/**
 	 * Pinta en la pantalla el número de minas que hay alrededor de la celda
@@ -164,11 +167,28 @@ public class VentanaPrincipal {
 	 * @param i: posición vertical de la celda.
 	 * @param j: posición horizontal de la celda.
 	 */
-	public void mostrarNumMinasAlrededor(int i , int j) {
-		//TODO
-		//seleccionar el panel[i][j] correspondiente
-		//Eliminar todos los componentes(INTERNET)
-		//Añadir JLabel centrad oy no editable
+	public void mostrarNumMinasAlrededor(int i , int j) { 
+		JLabel label;
+		int n;
+		if(juego.abrirCasilla(i, j)){
+			n = juego.getMinasAlrededor(i, j);
+			label  = new JLabel(Integer.toString(n), SwingConstants.CENTER);
+			label.setBackground(correspondenciaColores[n]);
+			
+			//seleccionar el panel[i][j] correspondiente
+			//Eliminar todos los componentes
+			panelesJuego[i][j].remove(botonesJuego[i][j]);
+			//Añadir JLabel centrado y no editable
+			panelesJuego[i][j].add(label);
+			actualizarPuntuacion();
+			refrescarPantalla(); 
+		}else{
+			if(juego.esFinJuego()){
+				mostrarFinJuego(false);
+			}else{
+				mostrarFinJuego(true);
+			}
+		}
 	}
 	
 	
@@ -178,14 +198,20 @@ public class VentanaPrincipal {
 	 * @post : Todos los botones se desactivan excepto el de volver a iniciar el juego.
 	 */
 	public void mostrarFinJuego(boolean porExplosion) {
-		//TODO
+		if (porExplosion) {
+			JOptionPane.showMessageDialog(ventana,"ERA UNA BOMBA :( \nPuntos: "+ juego.getPuntuacion());
+			ventana.dispose();
+		} else {
+			JOptionPane.showMessageDialog(ventana,"GANASTE!! :) \nPuntos: "+ juego.getPuntuacion());
+			ventana.dispose();
+		}
 	}
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
 	 */
 	public void actualizarPuntuacion() {
-		//TODO
+		pantallaPuntuacion .setText(juego.getPuntuacion()+"");
 	}
 	
 	/**

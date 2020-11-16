@@ -9,7 +9,7 @@ import java.util.Random;
  * Si hay una mina en una posición guarda el número -1
  * Si no hay una mina, se guarda cuántas minas hay alrededor.
  * Almacena la puntuación de la partida
- * @author jesusredondogarcia
+ * @author AlbertoMartin
  *
  */
 public class ControlJuego {
@@ -20,14 +20,13 @@ public class ControlJuego {
 	private int [][] tablero;
 	private int puntuacion;
 	
-	
 	public ControlJuego() {
 		//Creamos el tablero:
 		tablero = new int[LADO_TABLERO][LADO_TABLERO];
 		
 		//Inicializamos una nueva partida
 		inicializarPartida();
-		depurarTablero();
+		depurarTablero(); 
 	}
 	
 	
@@ -111,6 +110,7 @@ public class ControlJuego {
 			puntuacion ++;
 			return true;
 		}else{//SI hay bomba
+
 			return false;
 		}
 	}
@@ -124,7 +124,7 @@ public class ControlJuego {
 	public boolean esFinJuego(){
 		int ptosTotales = (LADO_TABLERO*LADO_TABLERO)-MINAS_INICIALES;
 		if(getPuntuacion() == ptosTotales){
-			return false;
+			return true;
 		}else{
 			return false;
 		}
@@ -153,9 +153,9 @@ public class ControlJuego {
 	 * @return Un entero que representa el número de minas alrededor de la celda
 	 */
 	public int getMinasAlrededor(int i, int j) {
-		return calculoMinasAdjuntas(i, j);
+		return tablero[i][j];
 	}
-
+	
 	/**
 	 * Método que devuelve la puntuación actual
 	 * @return Un entero con la puntuación actual
@@ -163,5 +163,4 @@ public class ControlJuego {
 	public int getPuntuacion() {
 		return puntuacion;
 	}
-	
 }
