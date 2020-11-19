@@ -1,8 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 /**
  * Clase que implementa el listener de los botones del Buscaminas.
@@ -15,9 +13,13 @@ import javax.swing.JPanel;
 public class ActionBoton implements ActionListener{
 
 	VentanaPrincipal ventana;
+	int i;
+	int j;
 
-	public ActionBoton(VentanaPrincipal vPrincipal) {
+	public ActionBoton(VentanaPrincipal vPrincipal,int i,int j) {
 		ventana = vPrincipal;
+		this.i = i;
+		this.j = j;
 	}
 	
 	/**
@@ -25,17 +27,9 @@ public class ActionBoton implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton bPulsado = (JButton)e.getSource();
-		int i=0,j=0;
-		for(int k=0 ; k<ventana.panelesJuego.length ;k++){
-			for(int l=0 ; l<ventana.panelesJuego.length ;l++){
-				if(bPulsado == ventana.botonesJuego[k][l]){
-					i = k;
-					j = l;
-				}
-			}
-		}
+
 		ventana.mostrarNumMinasAlrededor(i,j);	
+		
 
 	}
 

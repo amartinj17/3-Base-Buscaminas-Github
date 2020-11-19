@@ -19,11 +19,21 @@ public class ControlJuego {
 
 	private int [][] tablero;
 	private int puntuacion;
+
+	private VentanaPrincipal ventana;
+
+	public int[][] getTablero() {
+		return tablero;
+	}
 	
-	public ControlJuego() {
+	public ControlJuego(VentanaPrincipal v) {
 		//Creamos el tablero:
 		tablero = new int[LADO_TABLERO][LADO_TABLERO];
 		
+		//Guardar VentanaPrincipal
+		ventana = v;
+
+
 		//Inicializamos una nueva partida
 		inicializarPartida();
 		depurarTablero(); 
@@ -94,9 +104,22 @@ public class ControlJuego {
 				}
 			}
 		}
-
+/*
+		ABRIR LOS 0 DE AL REDEDOR
+		 if(minas == 0){
+			for(vertical = (i-1); vertical <= (i+1); vertical++){
+				for(horizontal = (j-1); horizontal <=(j+1) ; horizontal++){
+					if(vertical>=0 && vertical<=LADO_TABLERO-1 && horizontal>=0 && horizontal<=LADO_TABLERO-1){
+						ventana.mostrarNumMinasAlrededor(i, j);
+					}
+				}
+			}
+		} 
+*/
 		return minas;
 	}
+
+	
 		
 	/**
 	 * Método que nos permite 
