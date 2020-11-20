@@ -133,7 +133,6 @@ public class ControlJuego {
 			puntuacion ++;
 			return true;
 		}else{//SI hay bomba
-
 			return false;
 		}
 	}

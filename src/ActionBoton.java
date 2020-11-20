@@ -27,10 +27,8 @@ public class ActionBoton implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		ventana.mostrarNumMinasAlrededor(i,j);	
 		
-
+		ventana.mostrarNumMinasAlrededor(i,j);	
 	}
 
 }

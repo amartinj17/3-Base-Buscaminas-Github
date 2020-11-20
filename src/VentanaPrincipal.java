@@ -205,20 +205,37 @@ public class VentanaPrincipal {
 	 *       juego.
 	 */
 	public void mostrarFinJuego(final boolean porExplosion) {
-		/* ImageIcon imageMina = new ImageIcon(E:\DAM\DI\t02.e33_BuscaminasBase); */
+		
 		if (porExplosion) {
+			/* mostrarMinasFinal(); */
 			JOptionPane.showMessageDialog(ventana, "ERA UNA BOMBA :( \nPuntos: " + juego.getPuntuacion());
 			ventana.dispose();
 		} else {
+			/* mostrarMinasFinal() */;
 			JOptionPane.showMessageDialog(ventana, "GANASTE!! :) \nPuntos: " + juego.getPuntuacion());
 			ventana.dispose();
 		}
-		/*
-		 * for(int i=0 ; i<juego.LADO_TABLERO ; i++){ for(int j=0 ; j<juego.LADO_TABLERO
-		 * ; j++){ if(juego.getTablero()[i][j] == -1){
-		 * panelesJuego[i][j].setIcon(imageMina); } } }
-		 */
 	}
+	/**
+	 * Método que recorre
+	 *  
+	 * */ 
+	/* public void mostrarMinasFinal(){
+		JLabel mina = new JLabel();
+		ImageIcon imageMina = new ImageIcon("./Imagenes/mina.png"); 
+
+		for(int i=0 ; i<juego.LADO_TABLERO ; i++){ 
+			for(int j=0 ; j<juego.LADO_TABLERO ; j++){ 
+				if(juego.getTablero()[i][j] == -1){
+					panelesJuego[i][j].remove(botonesJuego[i][j]);
+					panelesJuego[i][j].add(mina);
+					mina.setIcon(imageMina); 
+					refrescarPantalla();
+				}
+			} 
+		}
+		
+	} */
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
