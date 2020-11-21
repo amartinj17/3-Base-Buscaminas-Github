@@ -208,8 +208,8 @@ public class ControlJuego {
 		JLabel jLmina;
 
 		for(int i=0 ; i<listaMinasI.size() ; i++){ 
-			jLmina = new JLabel();
-			jLmina.setIcon(imageMina);
+			jLmina = new JLabel(imageMina,SwingConstants.CENTER);
+			/* jLmina.setIcon(imageMina,); */
 			ventana.panelesJuego[listaMinasI.get(i)][listaMinasJ.get(i)].removeAll();
 			ventana.panelesJuego[listaMinasI.get(i)][listaMinasJ.get(i)].add(jLmina); 
 		}
