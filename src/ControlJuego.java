@@ -1,5 +1,10 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.*; 
 
 /* import sun.launcher .resources.launcher; DA ERROR*/
 
@@ -16,11 +21,15 @@ public class ControlJuego {
 	private final static int MINA = -1;
 	final int MINAS_INICIALES = 20;
 	final int LADO_TABLERO = 10;
+	
 
 	private int [][] tablero;
 	private int puntuacion;
 
 	private VentanaPrincipal ventana;
+
+	ArrayList<Integer> listaMinasI;//Array que guarda la I de las minas 
+	ArrayList<Integer> listaMinasJ;//Array que guarda la J de las minas 
 
 	public int[][] getTablero() {
 		return tablero;
@@ -49,6 +58,8 @@ public class ControlJuego {
 		Random r = new Random();
 		boolean hayMina;
 		int iAux,jAux;
+		listaMinasI =new  ArrayList<>();
+		listaMinasJ =new  ArrayList<>();
 		
 		//poner todas las posiciones del tablero a 0
 		for(int l=0 ; l<LADO_TABLERO ; l++){
@@ -68,7 +79,9 @@ public class ControlJuego {
 					hayMina = true;
 				}else{//Si no hay mina, añade una y sale del bucle
 					hayMina = false;
-					tablero[iAux][jAux] = MINA;
+					tablero[iAux][jAux] = MINA; 
+					listaMinasI.add(iAux);     
+					listaMinasJ.add(jAux);        
 				}
 			}while(hayMina);
 		}
@@ -184,5 +197,22 @@ public class ControlJuego {
 	 */
 	public int getPuntuacion() {
 		return puntuacion;
+	}
+
+	/**
+	 * Muestra todos las minas con su imagen
+	 */
+	public void mostrarSoloMinas(){
+
+		ImageIcon imageMina = new ImageIcon("Imagenes/mina.png"); 
+		JLabel jLmina;
+
+		for(int i=0 ; i<listaMinasI.size() ; i++){ 
+			jLmina = new JLabel();
+			jLmina.setIcon(imageMina);
+			ventana.panelesJuego[listaMinasI.get(i)][listaMinasJ.get(i)].removeAll();
+			ventana.panelesJuego[listaMinasI.get(i)][listaMinasJ.get(i)].add(jLmina); 
+		}
+		ventana.refrescarPantalla(); 
 	}
 }

@@ -3,7 +3,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -144,6 +143,7 @@ public class VentanaPrincipal {
 		botonEmpezar.addActionListener((f) -> {// Dar listeners a los botones en el momento en el que se da al botón de
 												// empezar
 			botonEmpezar.setText("JUGANDO");
+			pantallaPuntuacion.setText(0+"");
 			for (i = 0; i < juego.LADO_TABLERO; i++) {
 				for (j = 0; j < juego.LADO_TABLERO; j++) {
 					botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
@@ -180,9 +180,7 @@ public class VentanaPrincipal {
 			actualizarPuntuacion();
 			refrescarPantalla(); 
 		}else{
-			if(juego.esFinJuego()){
-				mostrarFinJuego(false);
-			}else{
+			if(!juego.esFinJuego()){
 				mostrarFinJuego(true);
 			}
 		}
@@ -205,37 +203,16 @@ public class VentanaPrincipal {
 	 *       juego.
 	 */
 	public void mostrarFinJuego(final boolean porExplosion) {
-		
+		juego.mostrarSoloMinas();
 		if (porExplosion) {
-			/* mostrarMinasFinal(); */
 			JOptionPane.showMessageDialog(ventana, "ERA UNA BOMBA :( \nPuntos: " + juego.getPuntuacion());
 			ventana.dispose();
 		} else {
-			/* mostrarMinasFinal() */;
 			JOptionPane.showMessageDialog(ventana, "GANASTE!! :) \nPuntos: " + juego.getPuntuacion());
 			ventana.dispose();
 		}
 	}
-	/**
-	 * Método que recorre
-	 *  
-	 * */ 
-	/* public void mostrarMinasFinal(){
-		JLabel mina = new JLabel();
-		ImageIcon imageMina = new ImageIcon("./Imagenes/mina.png"); 
-
-		for(int i=0 ; i<juego.LADO_TABLERO ; i++){ 
-			for(int j=0 ; j<juego.LADO_TABLERO ; j++){ 
-				if(juego.getTablero()[i][j] == -1){
-					panelesJuego[i][j].remove(botonesJuego[i][j]);
-					panelesJuego[i][j].add(mina);
-					mina.setIcon(imageMina); 
-					refrescarPantalla();
-				}
-			} 
-		}
-		
-	} */
+	
 
 	/**
 	 * Método que muestra la puntuación por pantalla.
