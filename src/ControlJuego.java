@@ -31,6 +31,9 @@ public class ControlJuego {
 	ArrayList<Integer> listaMinasI;//Array que guarda la I de las minas 
 	ArrayList<Integer> listaMinasJ;//Array que guarda la J de las minas 
 
+	ArrayList<Integer> lista0I;//Array que guarda la I de los 0 
+	ArrayList<Integer> lista0J;//Array que guarda la J de los 0
+
 	public int[][] getTablero() {
 		return tablero;
 	}
@@ -72,8 +75,8 @@ public class ControlJuego {
 		//Colocar minas de forma aleatoria donde no haya ninguna ya
 		for(int k=0 ; k<MINAS_INICIALES ; k++){
 			do{
-				iAux = (r.nextInt(10));
-				jAux = (r.nextInt(10));
+				iAux = (r.nextInt(LADO_TABLERO));
+				jAux = (r.nextInt(LADO_TABLERO));
 
 				if(tablero[iAux][jAux] == MINA){//Si hay mina calcula otra poscicion
 					hayMina = true;
@@ -86,7 +89,7 @@ public class ControlJuego {
 			}while(hayMina);
 		}
 
-		//Al final del m�todo hay que guardar el n�mero de minas para las casillas que no son mina:
+		//Al final del método hay que guardar el número de minas para las casillas que no son mina:
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				if (tablero[i][j] != MINA){
@@ -117,21 +120,30 @@ public class ControlJuego {
 				}
 			}
 		}
-/*
-		ABRIR LOS 0 DE AL REDEDOR
-		 if(minas == 0){
-			for(vertical = (i-1); vertical <= (i+1); vertical++){
-				for(horizontal = (j-1); horizontal <=(j+1) ; horizontal++){
-					if(vertical>=0 && vertical<=LADO_TABLERO-1 && horizontal>=0 && horizontal<=LADO_TABLERO-1){
-						ventana.mostrarNumMinasAlrededor(i, j);
+		
+		return minas;
+	}
+
+	/*
+	 *   ABRIR LOS 0 DE AL REDEDOR
+	  
+	public void abrirCerosCercanos(int i,int j){
+		int vertical=i,horizontal=j;
+		int num = 0;//Guarda el número de 0 en las casillas de al rededor
+		for(vertical = (i-1); vertical <= (i+1); vertical++){
+			for(horizontal = (j-1); horizontal <=(j+1) ; horizontal++){
+				if(vertical>=0 && vertical<=LADO_TABLERO-1 && horizontal>=0 && horizontal<=LADO_TABLERO-1){
+					if(tablero[vertical][horizontal] == 0){
+						num++;
 					}
 				}
 			}
 		} 
-*/
-		return minas;
-	}
-
+		if(num>=1){
+			ventana.mostrarNumMinasAlrededor(i,j); 
+		}
+	}*/
+	
 	
 		
 	/**
@@ -200,7 +212,7 @@ public class ControlJuego {
 	}
 
 	/**
-	 * Muestra todos las minas con su imagen
+	 * Muestra todas las minas con su imagen
 	 */
 	public void mostrarSoloMinas(){
 
@@ -209,7 +221,6 @@ public class ControlJuego {
 
 		for(int i=0 ; i<listaMinasI.size() ; i++){ 
 			jLmina = new JLabel(imageMina,SwingConstants.CENTER);
-			/* jLmina.setIcon(imageMina,); */
 			ventana.panelesJuego[listaMinasI.get(i)][listaMinasJ.get(i)].removeAll();
 			ventana.panelesJuego[listaMinasI.get(i)][listaMinasJ.get(i)].add(jLmina); 
 		}

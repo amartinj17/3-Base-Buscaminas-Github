@@ -61,7 +61,7 @@ public class VentanaPrincipal {
 		panelPuntuacion = new JPanel();
 		panelPuntuacion.setLayout(new GridLayout(1, 1));
 		panelJuego = new JPanel();
-		panelJuego.setLayout(new GridLayout(10, 10));
+		panelJuego.setLayout(new GridLayout(juego.LADO_TABLERO, juego.LADO_TABLERO));
 
 		botonEmpezar = new JButton("Go!");
 		pantallaPuntuacion = new JTextField(juego.getPuntuacion());
@@ -147,6 +147,7 @@ public class VentanaPrincipal {
 			for (i = 0; i < juego.LADO_TABLERO; i++) {
 				for (j = 0; j < juego.LADO_TABLERO; j++) {
 					botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
+					botonesJuego[i][j].addMouseListener(new EscuchaRaton(this, i, j));
 				}
 			}
 		});
@@ -164,18 +165,19 @@ public class VentanaPrincipal {
 	 * @param i: posición vertical de la celda.
 	 * @param j: posición horizontal de la celda.
 	 */
-	public void mostrarNumMinasAlrededor(final int i , final int j) { 
+	public void mostrarNumMinasAlrededor( int i , int j) { 
 		JLabel label;
 		int n;
 		if(juego.abrirCasilla(i, j)){
 			n = juego.getMinasAlrededor(i, j);
 			label  = new JLabel(Integer.toString(n), SwingConstants.CENTER);
+			
 			label.setForeground(correspondenciaColores[n]);
 			
 			//seleccionar el panel[i][j] correspondiente
 			//Eliminar todos los componentes
 			panelesJuego[i][j].remove(botonesJuego[i][j]);
-			//Añadir JLabel centrado y no editable
+			//Añadir JLabel centrado 
 			panelesJuego[i][j].add(label);
 			actualizarPuntuacion();
 			refrescarPantalla(); 
@@ -242,8 +244,7 @@ public class VentanaPrincipal {
 	 * Método para inicializar el programa
 	 */
 	public void inicializar() {
-		// IMPORTANTE, PRIMERO HACEMOS LA VENTANA VISIBLE Y LUEGO INICIALIZAMOS LOS
-		// COMPONENTES.
+		// IMPORTANTE, PRIMERO HACEMOS LA VENTANA VISIBLE Y LUEGO INICIALIZAMOS LOS COMPONENTES.
 		ventana.setVisible(true);
 		inicializarComponentes();
 		inicializarListeners();
