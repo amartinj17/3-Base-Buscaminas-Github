@@ -159,7 +159,7 @@ public class VentanaPrincipal {
 			botonEmpezar.setIcon(carita);
 			botonEmpezar.setText("");
 			pantallaPuntuacion.setText(0+"");
-			for (i = 0; i < juego.LADO_TABLERO; i++) {
+			for (i = 0; i < juego.LADO_TABLERO; i++) { //Añade a los botones los dos listeners
 				for (j = 0; j < juego.LADO_TABLERO; j++) {
 					botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
 					botonesJuego[i][j].addMouseListener(new EscuchaRaton(this, i, j,lBanderaI,lBanderaJ));
@@ -205,10 +205,6 @@ public class VentanaPrincipal {
 		if(juego.esFinJuego()){
 			mostrarFinJuego(false);
 		}
-		
-			
-		
-			
 	}
 
 	/**
@@ -223,11 +219,21 @@ public class VentanaPrincipal {
 	public void mostrarFinJuego(final boolean porExplosion) {
 		juego.mostrarSoloMinas();
 		if (porExplosion) {
-			JOptionPane.showMessageDialog(ventana, "ERA UNA MINA :( \nPuntos: " + juego.getPuntuacion());
-			ventana.dispose();
+			if ((JOptionPane.showConfirmDialog(ventana,"ERA UNA MINA :(\nPuntos: "+juego.getPuntuacion(),"¿Quieres volver a jugar?", JOptionPane.YES_NO_OPTION)) == 0) {
+				ventana.dispose();
+				VentanaPrincipal ventana = new VentanaPrincipal();
+				ventana.inicializar();
+			}else{
+				ventana.dispose(); 
+			}
 		} else {
-			JOptionPane.showMessageDialog(ventana, "GANASTE!! :) \nPuntos: " + juego.getPuntuacion());
-			ventana.dispose();
+			if ((JOptionPane.showConfirmDialog(ventana,"GANASTE!! :)\nPuntos: "+juego.getPuntuacion(),"¿Quieres volver a jugar?", JOptionPane.YES_NO_OPTION)) == 0) {
+				ventana.dispose();
+				VentanaPrincipal ventana = new VentanaPrincipal();
+				ventana.inicializar();
+			}else{
+				ventana.dispose();
+			}
 		}
 	}
 	
