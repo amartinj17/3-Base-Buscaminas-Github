@@ -22,7 +22,7 @@ public class ActionBoton implements ActionListener{
 	VentanaPrincipal ventana;
 	int i;
 	int j;
-
+	
 	public ActionBoton(VentanaPrincipal vPrincipal,int i,int j) {
 		ventana = vPrincipal;
 		this.i = i;

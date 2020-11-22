@@ -124,25 +124,7 @@ public class ControlJuego {
 		return minas;
 	}
 
-	/*
-	 *   ABRIR LOS 0 DE AL REDEDOR
-	  
-	public void abrirCerosCercanos(int i,int j){
-		int vertical=i,horizontal=j;
-		int num = 0;//Guarda el número de 0 en las casillas de al rededor
-		for(vertical = (i-1); vertical <= (i+1); vertical++){
-			for(horizontal = (j-1); horizontal <=(j+1) ; horizontal++){
-				if(vertical>=0 && vertical<=LADO_TABLERO-1 && horizontal>=0 && horizontal<=LADO_TABLERO-1){
-					if(tablero[vertical][horizontal] == 0){
-						num++;
-					}
-				}
-			}
-		} 
-		if(num>=1){
-			ventana.mostrarNumMinasAlrededor(i,j); 
-		}
-	}*/
+	
 	
 	
 		

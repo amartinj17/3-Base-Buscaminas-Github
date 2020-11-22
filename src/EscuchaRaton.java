@@ -13,61 +13,71 @@ public class EscuchaRaton implements MouseListener{
 
     ImageIcon imageBandera;
     JLabel jLbandera;
-    ArrayList<Integer> lBanderaI = new ArrayList<>();
-    ArrayList<Integer> lBanderaJ = new ArrayList<>();
-    int numeroBanderas;
+    JButton boton;
 
+    JButton botonBandera;
+    ArrayList<Integer> lBanderaI;
+    ArrayList<Integer> lBanderaJ;
 
     VentanaPrincipal ventana;
     int i;
     int j; 
 
-    public EscuchaRaton(VentanaPrincipal vp , int i , int j){
+    public EscuchaRaton(VentanaPrincipal vp , int i , int j,ArrayList<Integer> lBanderaI, ArrayList<Integer> lBanderaJ){
         this.ventana = vp;
         this.i = i;
         this.j = j; 
-        numeroBanderas = ventana.juego.MINAS_INICIALES;//Habrá un máximo de banderas igual al número de mians totales
+        this.lBanderaI = lBanderaI;
+        this.lBanderaJ = lBanderaJ;
+        
     }
     
     
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        
-
+        // TODO Auto-generated method stub
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         boolean bandera  = false;
-        JButton botonBandera;
+        
+        
 		if(SwingUtilities.isRightMouseButton(e)){
-            for(int k=0 ; k>lBanderaI.size() ; k++){
-                if((ventana.panelesJuego[i][j]) == (ventana.panelesJuego[lBanderaI.get(i)][lBanderaJ.get(j)])){
+            for(int k=0 ; k<lBanderaI.size() ; k++){
+                if((ventana.panelesJuego[i][j]) == (ventana.panelesJuego[lBanderaI.get(k)][lBanderaJ.get(k)])){
                     bandera = true;
-                    lBanderaI.remove(i);
-                    lBanderaJ.remove(j);
-                }else{
-                    bandera = false;
+                    lBanderaI.remove(k);
+                    lBanderaJ.remove(k);
                 }
             }
-
+            
+            
 			if(bandera){
+                
                 ventana.panelesJuego[i][j].removeAll();
                 ventana.panelesJuego[i][j].add(ventana.botonesJuego[i][j]);
             }else{
-                imageBandera = new ImageIcon("Imagenes/bandera.jpg");
-			    jLbandera = new JLabel(imageBandera,SwingConstants.CENTER);
-			    ventana.panelesJuego[i][j].removeAll();
-                ventana.panelesJuego[i][j].add(jLbandera); 
+
                 lBanderaI.add(i);
                 lBanderaJ.add(j);
+
+                imageBandera = new ImageIcon("Imagenes/bandera.jpg");
+                boton = new JButton();
+                boton.setIcon(imageBandera);
+                boton.addMouseListener(new EscuchaRaton(ventana, i, j, lBanderaI, lBanderaJ));
+                
+                ventana.panelesJuego[i][j].removeAll();
+                ventana.panelesJuego[i][j].add(boton);
+                
+                    
+                
             } 
             ventana.refrescarPantalla();
         }

@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +26,8 @@ public class VentanaPrincipal {
 	JPanel panelEmpezar;
 	JPanel panelPuntuacion;
 	JPanel panelJuego;
+	ArrayList<Integer> lBanderaI;
+    ArrayList<Integer> lBanderaJ;
 
 	// Todos los botones se meten en un panel independiente.
 	// Hacemos esto para que podamos cambiar después los componentes por otros
@@ -42,8 +46,8 @@ public class VentanaPrincipal {
 
 	// Constructor, marca el tamaño y el cierre del frame
 	public VentanaPrincipal() {
-		ventana = new JFrame();
-		ventana.setBounds(100, 100, 700, 500);
+		ventana = new JFrame("BuscaMinas");
+		ventana.setBounds(150, 50, 1000, 700);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		juego = new ControlJuego(this);
 	}
@@ -132,6 +136,10 @@ public class VentanaPrincipal {
 		panelEmpezar.add(botonEmpezar);
 		panelPuntuacion.add(pantallaPuntuacion);
 
+		//Inicializo las variables lBanderaI y lBanderaJ;
+		lBanderaI = new ArrayList<>() ;
+		lBanderaJ = new ArrayList<>();
+
 	}
 
 	/**
@@ -147,7 +155,7 @@ public class VentanaPrincipal {
 			for (i = 0; i < juego.LADO_TABLERO; i++) {
 				for (j = 0; j < juego.LADO_TABLERO; j++) {
 					botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
-					botonesJuego[i][j].addMouseListener(new EscuchaRaton(this, i, j));
+					botonesJuego[i][j].addMouseListener(new EscuchaRaton(this, i, j,lBanderaI,lBanderaJ));
 				}
 			}
 		});
@@ -207,7 +215,7 @@ public class VentanaPrincipal {
 	public void mostrarFinJuego(final boolean porExplosion) {
 		juego.mostrarSoloMinas();
 		if (porExplosion) {
-			JOptionPane.showMessageDialog(ventana, "ERA UNA BOMBA :( \nPuntos: " + juego.getPuntuacion());
+			JOptionPane.showMessageDialog(ventana, "ERA UNA MINA :( \nPuntos: " + juego.getPuntuacion());
 			ventana.dispose();
 		} else {
 			JOptionPane.showMessageDialog(ventana, "GANASTE!! :) \nPuntos: " + juego.getPuntuacion());
