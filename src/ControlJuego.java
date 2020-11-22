@@ -18,9 +18,14 @@ import javax.swing.*;
  *
  */
 public class ControlJuego {
+	/**"Marca" de que hay una mina en la casilla */
 	private final static int MINA = -1;
-	final int MINAS_INICIALES = 20;
+	/** */
 	final int LADO_TABLERO = 10;
+	/**Número de minas iniciales */
+	final int MINAS_INICIALES = (int)((LADO_TABLERO*LADO_TABLERO)*0.2);
+
+	
 	
 
 	private int [][] tablero;
