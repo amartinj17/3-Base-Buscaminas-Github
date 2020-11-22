@@ -1,3 +1,4 @@
+package Buscaminas;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,7 +16,8 @@ import javax.swing.*;
  * Si no hay una mina, se guarda cuántas minas hay alrededor.
  * Almacena la puntuación de la partida
  * @author AlbertoMartin
- *
+ * @since 1.0
+ * @version 1.0
  */
 public class ControlJuego {
 	//Atributo que guarda un objetoVentanaPrincipal

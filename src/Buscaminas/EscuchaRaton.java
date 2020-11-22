@@ -1,3 +1,5 @@
+package Buscaminas;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
@@ -5,7 +7,12 @@ import javax.swing.SwingUtilities;
 import java.awt.event.*;
 import java.util.ArrayList;
 /**
- * Clase para poner la bandera a una posición al pulsar el clic derecho
+ * Clase que implementa el listener de los botones del Buscaminas.
+ * Puede acceder a la ventana principal
+ * @author AlbertoMartin
+ * @since 1.0
+ * @version 1.0
+ * @see VentanaPrincipal
  */
 public class EscuchaRaton implements MouseListener{
     

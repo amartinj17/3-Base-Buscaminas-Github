@@ -1,3 +1,5 @@
+package Buscaminas;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,7 +9,7 @@ import java.awt.event.ActionListener;
  * Se puede lograr pasando en el constructor la referencia a la ventana.
  * Recuerda que desde la ventana, se puede acceder a la variable de tipo ControlJuego
  * @author AlbertoMartin
- **@since 1.0
+ * @since 1.0
  * @version 1.0
  * @see VentanaPrincipal
  */
