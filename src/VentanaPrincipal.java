@@ -23,7 +23,7 @@ public class VentanaPrincipal {
 	int i, j;
 	// La ventana principal, en este caso, guarda todos los componentes:
 	JFrame ventana;
-	JPanel panelImagen;
+	JTextField numMinas;
 	JPanel panelEmpezar;
 	JPanel panelPuntuacion;
 	JPanel panelJuego;
@@ -42,8 +42,7 @@ public class VentanaPrincipal {
 	JButton botonEmpezar;
 	JTextField pantallaPuntuacion;
 
-	//Tezto que indica el número de minas que hay en la partida
-	JTextField numMinas;
+	
 
 	// LA VENTANA GUARDA UN CONTROL DE JUEGO:
 	ControlJuego juego;
@@ -64,7 +63,6 @@ public class VentanaPrincipal {
 		ventana.setLayout(new GridBagLayout());
 
 		// Inicializamos componentes
-		panelImagen = new JPanel();
 		panelEmpezar = new JPanel();
 		panelEmpezar.setLayout(new GridLayout(1, 1));
 		panelPuntuacion = new JPanel();
@@ -79,7 +77,7 @@ public class VentanaPrincipal {
 		pantallaPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
 
 		// Bordes y colores:
-		panelImagen.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+		numMinas.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		panelEmpezar.setBorder(BorderFactory.createTitledBorder("Empezar"));
 		panelPuntuacion.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 		panelJuego.setBorder(BorderFactory.createTitledBorder("Juego"));
@@ -92,8 +90,9 @@ public class VentanaPrincipal {
 		settings.weightx = 1;
 		settings.weighty = 1;
 		settings.fill = GridBagConstraints.BOTH;
-		panelImagen.add(numMinas);
-		ventana.add(panelImagen, settings);
+		numMinas.setEditable(false);
+		numMinas.setText("     "+juego.MINAS_INICIALES+" MINAS");
+		ventana.add(numMinas, settings);
 		// VERDE
 		settings = new GridBagConstraints();
 		settings.gridx = 1;
