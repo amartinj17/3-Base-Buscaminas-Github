@@ -42,7 +42,7 @@ public class VentanaPrincipal {
 	JButton botonEmpezar;
 	JTextField pantallaPuntuacion;
 
-	
+	int seleccion;
 
 	// LA VENTANA GUARDA UN CONTROL DE JUEGO:
 	ControlJuego juego;
@@ -51,9 +51,35 @@ public class VentanaPrincipal {
 	// Constructor, marca el tamaño y el cierre del frame
 	public VentanaPrincipal() {
 		ventana = new JFrame("BuscaMinas");
-		ventana.setBounds(150, 50, 1000, 700);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		juego = new ControlJuego(this);
+		 
+		if(preguntarTamano()){
+			ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		}else{
+			ventana.setBounds(150, 50, 1000, 700);
+		}
+		
+	}
+	/**
+	 * Método que regoge el dato del tamaño del lado
+	 */
+	private boolean preguntarTamano() {
+		Boolean grande = false;
+		try {
+			seleccion = Integer.valueOf(JOptionPane.showInputDialog("Indica el tamaño del lado del tablero (un número)")); 
+			if(seleccion < 2){
+				seleccion = 2;
+				grande = false;
+			}
+			if(seleccion > 35){//Si el tamaño es muy grande 
+				seleccion = 35;
+				grande = true;
+			}
+			juego = new ControlJuego(this,seleccion);
+		}catch(Exception e) {
+			preguntarTamano();
+		}
+		return grande;
 	}
 
 	// Inicializa todos los componentes del frame
@@ -270,6 +296,7 @@ public class VentanaPrincipal {
 		ventana.setVisible(true);
 		inicializarComponentes();
 		inicializarListeners();
+
 	}
 
 }

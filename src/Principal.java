@@ -1,5 +1,6 @@
 import java.awt.EventQueue;
 
+
 /**
  * Clase principal del Buscaminas
  * @author  AlbertoMartin

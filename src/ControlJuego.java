@@ -1,4 +1,4 @@
-import java.awt.Color;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,12 +18,13 @@ import javax.swing.*;
  *
  */
 public class ControlJuego {
+	private VentanaPrincipal ventana;
 	/**"Marca" de que hay una mina en la casilla */
 	private final static int MINA = -1;
-	/** */
-	final int LADO_TABLERO = 10;
+	/** Atributo que guarda el valor del lado del tablero*/
+	int LADO_TABLERO;
 	/**Número de minas iniciales */
-	final int MINAS_INICIALES = (int)((LADO_TABLERO*LADO_TABLERO)*0.2);
+	final int MINAS_INICIALES; 
 
 	
 	
@@ -31,7 +32,7 @@ public class ControlJuego {
 	private int [][] tablero;
 	private int puntuacion;
 
-	private VentanaPrincipal ventana;
+	
 
 	ArrayList<Integer> listaMinasI;//Array que guarda la I de las minas 
 	ArrayList<Integer> listaMinasJ;//Array que guarda la J de las minas 
@@ -43,8 +44,10 @@ public class ControlJuego {
 		return tablero;
 	}
 	
-	public ControlJuego(VentanaPrincipal v) {
+	public ControlJuego(VentanaPrincipal v,int tam) {
 		//Creamos el tablero:
+		LADO_TABLERO = tam;
+		MINAS_INICIALES = Math.round((float)((LADO_TABLERO*LADO_TABLERO)*0.2));
 		tablero = new int[LADO_TABLERO][LADO_TABLERO];
 		
 		//Guardar VentanaPrincipal
@@ -66,8 +69,8 @@ public class ControlJuego {
 		Random r = new Random();
 		boolean hayMina;
 		int iAux,jAux;
-		listaMinasI =new  ArrayList<>();
-		listaMinasJ =new  ArrayList<>();
+		listaMinasI = new  ArrayList<>();
+		listaMinasJ = new  ArrayList<>();
 		
 		//poner todas las posiciones del tablero a 0
 		for(int l=0 ; l<LADO_TABLERO ; l++){
