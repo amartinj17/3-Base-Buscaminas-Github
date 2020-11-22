@@ -18,6 +18,7 @@ import javax.swing.*;
  *
  */
 public class ControlJuego {
+	//Atributo que guarda un objetoVentanaPrincipal
 	private VentanaPrincipal ventana;
 	/**"Marca" de que hay una mina en la casilla */
 	private final static int MINA = -1;
@@ -26,13 +27,10 @@ public class ControlJuego {
 	/**Número de minas iniciales */
 	final int MINAS_INICIALES; 
 
-	
-	
-
+	//atributo que guarda una matriz de valores
 	private int [][] tablero;
+	//Atributo que guarda la puntuación 
 	private int puntuacion;
-
-	
 
 	ArrayList<Integer> listaMinasI;//Array que guarda la I de las minas 
 	ArrayList<Integer> listaMinasJ;//Array que guarda la J de las minas 
@@ -40,10 +38,18 @@ public class ControlJuego {
 	ArrayList<Integer> lista0I;//Array que guarda la I de los 0 
 	ArrayList<Integer> lista0J;//Array que guarda la J de los 0
 
+	/**
+	 * @return el objeto tablero que se usará durante toda la partida
+	 */
 	public int[][] getTablero() {
 		return tablero;
 	}
 	
+	/**
+	 * Método que genera valores para todas las constantes de la clase ControlJuego
+	 * @param v
+	 * @param tam
+	 */
 	public ControlJuego(VentanaPrincipal v,int tam) {
 		//Creamos el tablero:
 		LADO_TABLERO = tam;
@@ -131,10 +137,6 @@ public class ControlJuego {
 		
 		return minas;
 	}
-
-	
-	
-	
 		
 	/**
 	 * Método que nos permite 
@@ -151,9 +153,7 @@ public class ControlJuego {
 			return false;
 		}
 	}
-	
-	
-	
+
 	/**
 	 * Método que checkea si se ha terminado el juego porque se han abierto todas las casillas.
 	 * @return Devuelve verdadero si se han abierto todas las celdas que no son minas.
@@ -166,7 +166,6 @@ public class ControlJuego {
 			return false;
 		}
 	}
-	
 	
 	/**
 	 * Método que pinta por pantalla toda la información del tablero, se utiliza para depurar

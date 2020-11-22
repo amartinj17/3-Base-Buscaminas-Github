@@ -52,22 +52,22 @@ public class VentanaPrincipal {
 	public VentanaPrincipal() {
 		ventana = new JFrame("BuscaMinas");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 
-		if(preguntarTamano()){
+		if(preguntarTamano()){ // si es un tamaño grande, pone en pantalla completa 
 			ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		}else{
+		}else{//Si no, un tamaño normal
 			ventana.setBounds(150, 50, 1000, 700);
 		}
-		
 	}
+
 	/**
-	 * Método que regoge el dato del tamaño del lado
+	 * Método que recoge el dato del tamaño del lado y controla posibles excepciones
+	 * @return : Atributo que guarda si es un número muy grande o no
 	 */
 	private boolean preguntarTamano() {
 		Boolean grande = false;
 		try {
 			seleccion = Integer.valueOf(JOptionPane.showInputDialog("Indica el tamaño del lado del tablero (un número)")); 
-			if(seleccion < 2){
+			if(seleccion < 2){//El tamaño mínimo es 2, para que no haya errores con el número de minas
 				seleccion = 2;
 				grande = false;
 			}
@@ -223,12 +223,12 @@ public class VentanaPrincipal {
 			actualizarPuntuacion();
 			refrescarPantalla(); 
 		}else{
-			if(!juego.esFinJuego()){
+			if(!juego.esFinJuego()){//Si es final de juego por mina, marca la mina con un borde rojo
 				panelesJuego[i][j].setBorder(BorderFactory.createLineBorder(Color.red, 5));
 				mostrarFinJuego(true);
 			}
 		}
-		if(juego.esFinJuego()){
+		if(juego.esFinJuego()){//Si es fin de juego 
 			mostrarFinJuego(false);
 		}
 	}
