@@ -42,8 +42,12 @@ public class VentanaPrincipal {
 	JButton botonEmpezar;
 	JTextField pantallaPuntuacion;
 
+	//Tezto que indica el número de minas que hay en la partida
+	JTextField numMinas;
+
 	// LA VENTANA GUARDA UN CONTROL DE JUEGO:
 	ControlJuego juego;
+	
 
 	// Constructor, marca el tamaño y el cierre del frame
 	public VentanaPrincipal() {
@@ -67,6 +71,7 @@ public class VentanaPrincipal {
 		panelPuntuacion.setLayout(new GridLayout(1, 1));
 		panelJuego = new JPanel();
 		panelJuego.setLayout(new GridLayout(juego.LADO_TABLERO, juego.LADO_TABLERO));
+		numMinas = new JTextField(juego.MINAS_INICIALES);
 
 		botonEmpezar = new JButton("Go!");
 		pantallaPuntuacion = new JTextField(juego.getPuntuacion());
@@ -87,6 +92,7 @@ public class VentanaPrincipal {
 		settings.weightx = 1;
 		settings.weighty = 1;
 		settings.fill = GridBagConstraints.BOTH;
+		panelImagen.add(numMinas);
 		ventana.add(panelImagen, settings);
 		// VERDE
 		settings = new GridBagConstraints();
