@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -147,10 +148,11 @@ public class VentanaPrincipal {
 	 * programa
 	 */
 	public void inicializarListeners() {
-
+		ImageIcon carita = new ImageIcon("Imagenes/descarga.png");
 		botonEmpezar.addActionListener((f) -> {// Dar listeners a los botones en el momento en el que se da al botón de
 												// empezar
-			botonEmpezar.setText("JUGANDO");
+			botonEmpezar.setIcon(carita);
+			botonEmpezar.setText("");
 			pantallaPuntuacion.setText(0+"");
 			for (i = 0; i < juego.LADO_TABLERO; i++) {
 				for (j = 0; j < juego.LADO_TABLERO; j++) {
@@ -191,6 +193,7 @@ public class VentanaPrincipal {
 			refrescarPantalla(); 
 		}else{
 			if(!juego.esFinJuego()){
+				panelesJuego[i][j].setBorder(BorderFactory.createLineBorder(Color.red, 5));
 				mostrarFinJuego(true);
 			}
 		}
