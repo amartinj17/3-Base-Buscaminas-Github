@@ -1,4 +1,4 @@
-package Buscaminas;
+package codigo;
 
 import java.util.ArrayList;
 import java.util.Random;

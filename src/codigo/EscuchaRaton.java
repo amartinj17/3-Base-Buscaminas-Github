@@ -1,4 +1,4 @@
-package Buscaminas;
+package codigo;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

@@ -1,8 +1,6 @@
-package Buscaminas;
+package codigo;
 
 import java.awt.EventQueue;
-
-
 /**
  * Clase principal del Buscaminas
  * @author  AlbertoMartin

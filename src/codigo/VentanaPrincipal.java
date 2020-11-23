@@ -1,4 +1,4 @@
-package Buscaminas;
+package codigo;
 
 import java.awt.Color;
 import java.awt.GridBagConstraints;

@@ -1,4 +1,4 @@
-package Buscaminas;
+package codigo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
