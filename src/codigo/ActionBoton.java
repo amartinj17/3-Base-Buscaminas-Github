@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
  * De alguna manera tendrá que poder acceder a la ventana principal.
  * Se puede lograr pasando en el constructor la referencia a la ventana.
  * Recuerda que desde la ventana, se puede acceder a la variable de tipo ControlJuego
- * @author AlbertoMartin
+ * @author Alberto Martin
  * @since 1.0
  * @version 1.0
  * @see VentanaPrincipal
