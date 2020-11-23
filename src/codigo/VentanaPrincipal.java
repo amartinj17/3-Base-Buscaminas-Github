@@ -48,10 +48,10 @@ public class VentanaPrincipal {
 
 	// LA VENTANA GUARDA UN CONTROL DE JUEGO:
 	ControlJuego juego;
-	
+	Boolean esPrimerJuego;
 
 	// Constructor, marca el tamaño y el cierre del frame
-	public VentanaPrincipal() {
+	public VentanaPrincipal(Boolean esPrimerJuego) {
 		ventana = new JFrame("BuscaMinas");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		if(preguntarTamano()){ // si es un tamaño grande, pone en pantalla completa 
@@ -59,6 +59,7 @@ public class VentanaPrincipal {
 		}else{//Si no, un tamaño normal
 			ventana.setBounds(150, 50, 1000, 700);
 		}
+		this.esPrimerJuego = esPrimerJuego;
 	}
 
 	/**
@@ -181,9 +182,22 @@ public class VentanaPrincipal {
 	 * programa
 	 */
 	public void inicializarListeners() {
-		ImageIcon carita = new ImageIcon("Imagenes/descarga.png");
-		botonEmpezar.addActionListener((f) -> {// Dar listeners a los botones en el momento en el que se da al botón de
+		
+		ImageIcon carita = new ImageIcon("src/codigo/Imagenes/descarga.png");
+		if(esPrimerJuego){
+			botonEmpezar.addActionListener((f) -> {// Dar listeners a los botones en el momento en el que se da al botón de
 												// empezar
+				botonEmpezar.setIcon(carita);
+				botonEmpezar.setText("");
+				pantallaPuntuacion.setText(0+"");
+				for (i = 0; i < juego.LADO_TABLERO; i++) { //Añade a los botones los dos listeners
+					for (j = 0; j < juego.LADO_TABLERO; j++) {
+						botonesJuego[i][j].addActionListener(new ActionBoton(this, i, j));
+						botonesJuego[i][j].addMouseListener(new EscuchaRaton(this, i, j,lBanderaI,lBanderaJ));
+					}
+				}
+			});
+		}else{
 			botonEmpezar.setIcon(carita);
 			botonEmpezar.setText("");
 			pantallaPuntuacion.setText(0+"");
@@ -193,7 +207,8 @@ public class VentanaPrincipal {
 					botonesJuego[i][j].addMouseListener(new EscuchaRaton(this, i, j,lBanderaI,lBanderaJ));
 				}
 			}
-		});
+		}
+		
 	}
 
 	/**
@@ -249,7 +264,7 @@ public class VentanaPrincipal {
 		if (porExplosion) {
 			if ((JOptionPane.showConfirmDialog(ventana,"ERA UNA MINA :(\nPuntos: "+juego.getPuntuacion(),"¿Quieres volver a jugar?", JOptionPane.YES_NO_OPTION)) == 0) {
 				ventana.dispose();
-				VentanaPrincipal ventana = new VentanaPrincipal();
+				VentanaPrincipal ventana = new VentanaPrincipal(false);
 				ventana.inicializar();
 			}else{
 				ventana.dispose(); 
@@ -257,7 +272,7 @@ public class VentanaPrincipal {
 		} else {
 			if ((JOptionPane.showConfirmDialog(ventana,"GANASTE!! :)\nPuntos: "+juego.getPuntuacion(),"¿Quieres volver a jugar?", JOptionPane.YES_NO_OPTION)) == 0) {
 				ventana.dispose();
-				VentanaPrincipal ventana = new VentanaPrincipal();
+				VentanaPrincipal ventana = new VentanaPrincipal(false);
 				ventana.inicializar();
 			}else{
 				ventana.dispose();
