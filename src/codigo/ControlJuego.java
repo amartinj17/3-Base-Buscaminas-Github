@@ -207,7 +207,7 @@ public class ControlJuego {
 	 */
 	public void mostrarSoloMinas(){
 
-		ImageIcon imageMina = new ImageIcon("Imagenes/mina.png"); 
+		ImageIcon imageMina = new ImageIcon("src/codigo/Imagenes/mina.png"); 
 		JLabel jLmina;
 
 		for(int i=0 ; i<listaMinasI.size() ; i++){ 
