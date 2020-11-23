@@ -85,7 +85,7 @@ public class EscuchaRaton implements MouseListener{
                 lBanderaI.add(i);
                 lBanderaJ.add(j);
 
-                imageBandera = new ImageIcon("Imagenes/bandera.jpg");
+                imageBandera = new ImageIcon("src/codigo/Imagenes/bandera.jpg");
                 boton = new JButton();
                 boton.setIcon(imageBandera);
                 boton.addMouseListener(new EscuchaRaton(ventana, i, j, lBanderaI, lBanderaJ));
